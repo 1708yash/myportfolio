@@ -48,7 +48,7 @@ export default function About({}: Props) {
           experience of travelling and exploring new places. I love peaceful
           places and natural habitats. I am a good listener and I love to listen
           to people and their broad ideas specifically to get better grasp of my
-          surrounding.
+          surrounding. So this is me and this is my work.
         </p>
       </div>
     </motion.div>
