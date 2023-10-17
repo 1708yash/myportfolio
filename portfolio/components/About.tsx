@@ -51,6 +51,8 @@ export default function About({}: Props) {
           surrounding. So this is me and this is my work.
         </p>
       </div>
+
+    
     </motion.div>
   );
 }
