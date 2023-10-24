@@ -1,82 +1,54 @@
 "use client"
+import Image from "next/image";
+import Link from "next/link";
 import React from "react";
-import { SocialIcon } from "react-social-icons";
-import { motion } from "framer-motion";
-type Props = {};
-
-export default function Header({}: Props) {
+import Button from "./Button";
+import {HiMenu} from 'react-icons/hi'
+import {IoCloseSharp} from 'react-icons/io5'
+function Header() {
+  const Links = [
+    { name: "Home", link: "/" },
+    { name: "Projects", link: "/" },
+    { name: "About", link: "/about" },
+    { name: "Contact", link: "/contact" },
+  ];
+  const [open, setOpen] = React.useState(false)
   return (
-    <header
-      className="sticky top-0 p-5 flex items-start justify-between max-w-7xl mx-auto z-20
-    xl:items-center "
-    >
-      <motion.div
-        initial={{
-          x: -500,
-          opacity: 0,
-          scale: 0.5,
-        }}
-        animate={{
-          x: 0,
-          opacity: 1,
-          scale: 1,
-        }}
-        transition={{
-          duration: 1.5,
-        }}
-      >
-        <div className="flex flex-row items-center ">
-          {/* social icons */}
-          <SocialIcon
-            url="https://www.linkedin.com/in/yash-tomar1708/"
-            fgColor="gray"
-            bgColor="transparent"
-          />
-          <SocialIcon
-            url="https://github.com/1708yash"
-            fgColor="gray"
-            bgColor="transparent"
-          />
-          <SocialIcon
-            url="https://www.instagram.com/tomar___yash/"
-            fgColor="gray"
-            bgColor="transparent"
-          />
-          <SocialIcon
-            url="https://www.youtube.com/@letusunite1239"
-            fgColor="gray"
-            bgColor="transparent"
-          />
+    <div className="shadow-md w-full fixed top-0 left-0">
+      <div className="md:flex items-center justify-between bg-white py-4 md:px-10 px-7">
+        <div className="font-bold text-2xl cursor-pointer flex items-center font-[Poppins] text-gray800">
+          <span className="text-3xl text-indigo-600 mr-1 pt-2">
+            <Image src="/assets/ylogo.png" width={50} height={50} alt="logo" />
+          </span>
+          Designer
         </div>
-      </motion.div>
-      <motion.div
-        initial={{
-          x: 500,
-          opacity: 0,
-          scale: 0.5,
-        }}
-        animate={{
-          x: 0,
-          opacity: 1,
-          scale: 1,
-        }}
-        transition={{
-          duration: 1.5,
-        }}
-        className="flex flex-row items-center text-gray-300 cursor-pointer"
-      >
-        {/* contact me */}
-        <SocialIcon
-          className="cursor-pointer"
-          network="email"
-          fgColor="gray"
-          bgColor="transparent"
-        />
-        <p className="uppercase hidden md:inline-flex text-sm text-gray-400">
-          Feel Free to contact
-        </p>
-      </motion.div>
-    </header>
+        <div
+          onClick={() => setOpen(!open)}
+          className="text-3xl absolute right-8 top-6 cursor-pointer md:hidden"
+        >
+          <HiMenu className={`${open ? "hidden" : "visible"}`} />
+          <IoCloseSharp className={`${open ? "visible" : "hidden"}`} />
+        </div>
+        <ul
+          className={`md:flex md:items-center md:pb-0 pb-12 absolute md:static bg-white md:z-auto z-[-1] left-0 w-full md:w-auto md:pl-0 pl-9 transition-all duration-500 ease-in ${
+            open ? "top-20 opacity-100" : "top-[-490px]"
+          } opacity-0 md:opacity-0100`}
+        >
+          {Links.map((link) => (
+            <li className="md:ml-8 text-xl md:my-0 my-7" key={link.name}>
+              <Link
+                href={link.link}
+                className="text-gray-800 hover:text-gray-400 duration-300"
+              >
+                {link.name}
+              </Link>
+            </li>
+          ))}
+          <Button>Resume</Button>
+        </ul>
+      </div>
+    </div>
   );
 }
 
+export default Header;
